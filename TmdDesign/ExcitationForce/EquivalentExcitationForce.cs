@@ -48,11 +48,11 @@ namespace TmdDesign
         }
         public double DynamicStiffness
         {
-            set { this.lblDynamicStiffness.Text = value.ToString(); }
+            set { this.lblDynamicStiffness.Text = value.ToString("0.##"); }
         }
         public double EquivalentExcitationForce
         {
-            set { this.lblEquivalenForce.Text = value.ToString(); }
+            set { this.lblEquivalenForce.Text = value.ToString("0.##"); }
         }
 
         private void fillDampingRatioAndModalMass()
