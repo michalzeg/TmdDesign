@@ -4,69 +4,64 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TmdDesign.Calculations;
-using TmdDesign.Calculations;
 using TmdDesign.SimpleClasses;
 using TmdDesign.Matrix;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TmdDesign.ExcitationForces;
+using NUnit.Framework;
+
 namespace TmdDesign.Calculations.Tests
 {
-    [TestClass()]
+    [TestFixture]
     public class DifferentialEquationsMethodTests
     {
         private StructureParameters strParam;
         private TmdParameters tmdParam;
         private TimeParameters timeParms;
-        private ExcitationForces.ExcitationFunction exFunc = new ExcitationForces.ExcitationFunction(ExcitationForces.ExcitationFunctions.Sin);
+        private ExcitationFunction exFunc = new ExcitationForces.ExcitationFunction(ExcitationForces.ExcitationFunctions.Sin);
         private double force = 1000000;
 
-        public DifferentialEquationsMethodTests()
+        [OneTimeSetUp]
+        public void SetUp()
         {
-            //structure parameteres
             this.strParam = new StructureParameters(6000, 2, 0.02, false);
 
-            //tmd parameters
             var tmdCalc = new TmdParametersCalculations();
             this.tmdParam = tmdCalc.CalculateAllParameters(this.strParam, 0.05);
             this.timeParms = new TimeParameters(0, 0.0001);
-
         }
 
-        [TestMethod()]
-        public void CheckCalculationError()
+        [Test]
+        public void CheckCalculationError_ReturnsProperError()
         {
-
-            double exFrequency = 10;
-            var nm = new FiniteDifferenceMethod(this.strParam, this.tmdParam, this.force, this.timeParms, 0.01);
-            var nr = nm.Calculate(exFrequency);
+            double excitationFrequency = 10;
+            var factorNM = new FiniteDifferenceMethod(this.strParam, this.tmdParam, this.force, this.timeParms, 0.01);
+            var factorNR = factorNM.Calculate(excitationFrequency);
 
             var error = new List<Vector>();
-            var m = EquationOfMotionParameters.MassMatrix(this.strParam.M,this.tmdParam.M);
-            var k = EquationOfMotionParameters.StiffnessMatrix(this.strParam.K,this.tmdParam.K);
-            var c = EquationOfMotionParameters.DampingMatrix(this.strParam.C, this.tmdParam.C);
+            var mass = EquationOfMotionParameters.MassMatrix(this.strParam.M, this.tmdParam.M);
+            var stiffness = EquationOfMotionParameters.StiffnessMatrix(this.strParam.K, this.tmdParam.K);
+            var damping = EquationOfMotionParameters.DampingMatrix(this.strParam.C, this.tmdParam.C);
 
-            for (int i = 0; i <= nm.Time.Count - 1;i++ )
+            for (int i = 0; i <= factorNM.Time.Count - 1; i++)
             {
-                double time = nm.Time[i];
-                //Vector p = this.loadVector(exFrequency, time);
-                var p = nm.P[i]; //laod
-                var a = nm.A[i];//acceleration
-                var v = nm.V[i];//velocity
-                var u = nm.U[i];//displacement
+                double time = factorNM.Time[i];
 
-                var e = m * a + c * v + k * u - p;
+                var force = factorNM.P[i];
+                var acceleration = factorNM.A[i];
+                var velocity = factorNM.V[i];
+                var displacement = factorNM.U[i];
 
-                var e2 = new Vector(Math.Abs(e.A1), Math.Abs(e.A2));
+                var result = mass * acceleration + damping * velocity + stiffness * displacement - force;
+
+                var e2 = new Vector(Math.Abs(result.A1), Math.Abs(result.A2));
                 error.Add(e2);
             }
 
-            var max1 = Math.Round((error.ConvertAll<double>(x => x.A1)).Max(),3);
-            var max2 = Math.Round((error.ConvertAll<double>(x => x.A2)).Max(),3);
+            var max1 = Math.Round((error.ConvertAll<double>(x => x.A1)).Max(), 3);
+            var max2 = Math.Round((error.ConvertAll<double>(x => x.A2)).Max(), 3);
 
-            Assert.AreEqual(0.0000d, max1);
-            Assert.AreEqual(0.0000d, max2);
-
-                
-
+            Assert.AreEqual(0.0000, max1);
+            Assert.AreEqual(0.0000, max2);
         }
     }
 }
