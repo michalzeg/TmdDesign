@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6BD62581-33B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DB38EBE0-7197-44B1-85B1-A7E2A6E56E3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TmdDesign.Calculations", "TmdDesign.Calculations\TmdDesign.Calculations.csproj", "{AECACF99-D805-46BF-9E7D-043AC27D2825}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TmdDesign.Calculations", "src\TmdDesign.Calculations\TmdDesign.Calculations.csproj", "{AECACF99-D805-46BF-9E7D-043AC27D2825}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

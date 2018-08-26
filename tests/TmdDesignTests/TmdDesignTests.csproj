@@ -80,7 +80,7 @@
       <Project>{cdf18b83-1ddf-44f5-bdfa-fe12c982ae77}</Project>
       <Name>TmdDesign.App</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\TmdDesign.Calculations\TmdDesign.Calculations.csproj">
+    <ProjectReference Include="..\..\src\TmdDesign.Calculations\TmdDesign.Calculations.csproj">
       <Project>{aecacf99-d805-46bf-9e7d-043ac27d2825}</Project>
       <Name>TmdDesign.Calculations</Name>
     </ProjectReference>

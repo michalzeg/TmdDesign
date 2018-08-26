@@ -109,7 +109,7 @@
     <None Include="Resources\Drawing_Model.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\TmdDesign.Calculations\TmdDesign.Calculations.csproj">
+    <ProjectReference Include="..\TmdDesign.Calculations\TmdDesign.Calculations.csproj">
       <Project>{aecacf99-d805-46bf-9e7d-043ac27d2825}</Project>
       <Name>TmdDesign.Calculations</Name>
     </ProjectReference>
