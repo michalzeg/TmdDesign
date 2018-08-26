@@ -23,16 +23,16 @@ namespace TmdDesign.Calculations.Calculations
 
         public ResultsSingleDOF Calculate(double excitationFrequency)
         {
-            double u0 = BasicDynamicCalculations.StaticDisplacement(this.forceParms.ForceValue, this.structParms.Stiffness);//displacement due to static loads
+            double staticDisplacement = BasicDynamicCalculations.StaticDisplacement(this.forceParms.ForceValue, this.structParms.Stiffness);//displacement due to static loads
 
-            double rd = BasicDynamicCalculations.DynamicFactor(excitationFrequency, this.structParms.NaturalFrequency, this.structParms.Ksi);
+            double dynamicFactor = BasicDynamicCalculations.DynamicFactor(excitationFrequency, this.structParms.NaturalFrequency, this.structParms.Ksi);
 
-            ResultsSingleDOF res = new ResultsSingleDOF();
-            res.Omega = excitationFrequency;
-            res.StructureDisplacement = BasicDynamicCalculations.DynamicDisplacement(u0, rd);//dynamic displacement
-            res.StructureAcceleration = BasicDynamicCalculations.Acceleration(excitationFrequency, u0, rd);//acceleration
+            ResultsSingleDOF result = new ResultsSingleDOF();
+            result.Omega = excitationFrequency;
+            result.StructureDisplacement = BasicDynamicCalculations.DynamicDisplacement(staticDisplacement, dynamicFactor);//dynamic displacement
+            result.StructureAcceleration = BasicDynamicCalculations.Acceleration(excitationFrequency, staticDisplacement, dynamicFactor);//acceleration
 
-            return res;
+            return result;
         }
     }
 }
