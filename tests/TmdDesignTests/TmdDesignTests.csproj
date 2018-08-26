@@ -61,7 +61,7 @@
     <Compile Include="StructureParametersTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TmdDesign\TmdDesign.csproj">
+    <ProjectReference Include="..\..\src\TmdDesign\TmdDesign.csproj">
       <Project>{CDF18B83-1DDF-44F5-BDFA-FE12C982AE77}</Project>
       <Name>TmdDesign</Name>
     </ProjectReference>

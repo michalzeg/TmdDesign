@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TmdDesign", "TmdDesign\TmdDesign.csproj", "{CDF18B83-1DDF-44F5-BDFA-FE12C982AE77}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TmdDesign", "src\TmdDesign\TmdDesign.csproj", "{CDF18B83-1DDF-44F5-BDFA-FE12C982AE77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TmdDesignTests", "TmdDesignTests\TmdDesignTests.csproj", "{48393F7C-E8C9-49DE-A58E-4774003B8F25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TmdDesignTests", "tests\TmdDesignTests\TmdDesignTests.csproj", "{48393F7C-E8C9-49DE-A58E-4774003B8F25}"
 EndProject
 Global
 	GlobalSection(Performance) = preSolution
