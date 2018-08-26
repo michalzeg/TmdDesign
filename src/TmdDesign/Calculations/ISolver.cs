@@ -5,11 +5,11 @@ namespace TmdDesign.SimpleClasses
 {
     public interface ISolver
     {
-        List<Vector> U { get; } //list of vectors with displacement
-        List<Vector> V { get; } //list of vectors with velocity
-        List<Vector> A { get; } //list of vectors with acceleration
-        List<double> Time { get; } //list with time
-        List<Vector> P { get; } //list with load
+        IEnumerable<Vector> Displacement { get; }
+        IEnumerable<Vector> Velocity { get; }
+        IEnumerable<Vector> Acceleration { get; }
+        IEnumerable<double> Time { get; }
+        IEnumerable<Vector> Force { get; }
 
         ResultsTMD Calculate(double excitationFrequency);
     }

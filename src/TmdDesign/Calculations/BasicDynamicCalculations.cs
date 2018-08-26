@@ -2,9 +2,6 @@
 
 namespace TmdDesign.SimpleClasses
 {
-    /// <summary>
-    /// provides the methods for calculations of dynamic factor, displacement
-    /// </summary>
     public static class BasicDynamicCalculations
     {
         public static double DynamicFactor(double excitationFrequency, double naturalFrequency, double dampingRatio)

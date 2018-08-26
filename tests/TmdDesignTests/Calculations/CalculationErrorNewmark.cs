@@ -37,18 +37,18 @@ namespace TmdDesign.Calculations.Tests
             ResultsTMD nr = nm.Calculate(exFrequency);
 
             List<Vector> error = new List<Vector>();
-            Matrix2x2 m = EquationOfMotionParameters.MassMatrix(this.strParam.M, this.tmdParam.M);
-            Matrix2x2 k = EquationOfMotionParameters.StiffnessMatrix(this.strParam.K, this.tmdParam.K);
-            Matrix2x2 c = EquationOfMotionParameters.DampingMatrix(this.strParam.C, this.tmdParam.C);
+            Matrix2x2 m = EquationOfMotionParameters.MassMatrix(this.strParam.Mass, this.tmdParam.Mass);
+            Matrix2x2 k = EquationOfMotionParameters.StiffnessMatrix(this.strParam.Stiffness, this.tmdParam.Stiffness);
+            Matrix2x2 c = EquationOfMotionParameters.DampingMatrix(this.strParam.Damping, this.tmdParam.Damping);
 
             for (int i = 0; i <= nm.Time.Count - 1; i++)
             {
                 double time = nm.Time[i];
                 //Vector p = this.loadVector(exFrequency, time);
-                Vector p = nm.P[i]; //laod
-                Vector a = nm.A[i];//acceleration
-                Vector v = nm.V[i];//velocity
-                Vector u = nm.U[i];//displacement
+                Vector p = nm.Force[i]; //laod
+                Vector a = nm.Acceleration[i];//acceleration
+                Vector v = nm.Velocity[i];//velocity
+                Vector u = nm.Displacement[i];//displacement
 
                 Vector e = m * a + c * v + k * u - p;
 

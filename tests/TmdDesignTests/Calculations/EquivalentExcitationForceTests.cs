@@ -26,8 +26,9 @@ namespace TmdDesign.ExcitationForces.Tests
                 DynamicDisplacement = 0.041544832
             };
 
-            var eqForceCalcs = new EquivalentExcitationForce();
-            double expectedEquivalentDynamicForce = Math.Round(eqForceCalcs.CalculateEquivalenDynamicForce(inputData), 3);
+            var equivalentForceCalcs = new EquivalentExcitationForce();
+            equivalentForceCalcs.CalculateEquivalenDynamicForce(inputData);
+            double expectedEquivalentDynamicForce = Math.Round(equivalentForceCalcs.DynamicForce, 3);
 
             Assert.AreEqual(expectedEquivalentDynamicForce, actualEquivalentDynamicForce);
         }

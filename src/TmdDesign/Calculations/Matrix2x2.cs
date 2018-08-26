@@ -8,10 +8,6 @@ namespace TmdDesign.Matrix
 {
     public class Matrix2x2
     {
-        //Matrix fields
-        //|a11|a12
-        //|a21|a22
-
         #region Private statements
 
         private double determinant;

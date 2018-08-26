@@ -2,23 +2,10 @@
 
 namespace TmdDesign.Matrix
 {
-    /// <summary>
-    /// basic class for two elements vector
-    /// </summary>
     public class Vector
     {
-        /// <summary>
-        /// Vactor class
-        /// a1
-        /// --
-        /// a2
-        /// </summary>
-        private double a1;
-
-        private double a2;
-
-        public double A1 { get { return this.a1; } set { this.a1 = value; } }
-        public double A2 { get { return this.a2; } set { this.a2 = value; } }
+        public double A1 { get; set; }
+        public double A2 { get; set; }
 
         public Vector()
         {
@@ -26,8 +13,8 @@ namespace TmdDesign.Matrix
 
         public Vector(double a1, double a2)
         {
-            this.a1 = a1;
-            this.a2 = a2;
+            this.A1 = a1;
+            this.A2 = a2;
         }
 
         public List<double> ToList()

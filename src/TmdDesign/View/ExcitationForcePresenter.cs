@@ -21,12 +21,11 @@ namespace TmdDesign
         {
             ExcitationForceInputData inputData = this.view.InputData;
 
-            EquivalentExcitationForce eqForce = new EquivalentExcitationForce();
-            double p = eqForce.CalculateEquivalenDynamicForce(inputData);
-            double k = eqForce.DynamicStiffness;
+            var equivalentForce = new EquivalentExcitationForce();
+            equivalentForce.CalculateEquivalenDynamicForce(inputData);
 
-            this.view.DynamicStiffness = k;
-            this.view.EquivalentExcitationForce = p;
+            this.view.DynamicStiffness = equivalentForce.DynamicStiffness;
+            this.view.EquivalentExcitationForce = equivalentForce.DynamicForce;
         }
     }
 }

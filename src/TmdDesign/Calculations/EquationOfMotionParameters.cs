@@ -4,69 +4,61 @@ using TmdDesign.ExcitationForces;
 
 namespace TmdDesign.SimpleClasses
 {
-    /// <summary>
-    /// calculates the strifness, mass and damping matricies
-    /// </summary>
     public static class EquationOfMotionParameters
     {
-        public static Matrix2x2 MassMatrix(double strM, double tmdM)
+        public static Matrix2x2 MassMatrix(double structureMass, double tmdMass)
         {
             //mass structure
             //|tmdMass | 0
             //|0       | structure mass
-            Matrix2x2 m = new Matrix2x2()
+            Matrix2x2 mass = new Matrix2x2()
             {
-                A11 = tmdM,
+                A11 = tmdMass,
                 A12 = 0,
                 A21 = 0,
-                A22 = strM
+                A22 = structureMass
             };
-            return m;
+            return mass;
         }
 
-        public static Matrix2x2 StiffnessMatrix(double strK, double tmdK)
+        public static Matrix2x2 StiffnessMatrix(double structureStiffness, double tmdStiffness)
         {
-            //mass structure
+            //stiffness structure
             //|tmdStiffness  | -tmdStiffness
             //|-tmdStiffness | tmdStiffnes + structureStiffness
-            Matrix2x2 k = new Matrix2x2()
+            Matrix2x2 stiffness = new Matrix2x2()
             {
-                A11 = tmdK,
-                A12 = -tmdK,
-                A21 = -tmdK,
-                A22 = tmdK + strK
+                A11 = tmdStiffness,
+                A12 = -tmdStiffness,
+                A21 = -tmdStiffness,
+                A22 = tmdStiffness + structureStiffness
             };
-            return k;
+            return stiffness;
         }
 
-        public static Matrix2x2 DampingMatrix(double strC, double tmdC)
+        public static Matrix2x2 DampingMatrix(double structureDamping, double tmdDamping)
         {
-            //mass structure
+            //damping structure
             //|tmdDamping  | -tmdDamping
             //|-tmdDamping | tmdDamping + structureDamping
-            Matrix2x2 c = new Matrix2x2()
+            Matrix2x2 damping = new Matrix2x2()
             {
-                A11 = tmdC,
-                A12 = -tmdC,
-                A21 = -tmdC,
-                A22 = strC + tmdC
+                A11 = tmdDamping,
+                A12 = -tmdDamping,
+                A21 = -tmdDamping,
+                A22 = structureDamping + tmdDamping
             };
-            return c;
+            return damping;
         }
 
-        public static Vector LoadVector(double omega, double t, double value, ExcitationFunction function)
+        public static Vector LoadVector(double omega, double time, double forceValue, ExcitationFunction function)
         {
-            //t - time
-            //omega - excitation frequency
-            //load vector strucutre
-            //0
-            //P
-            Vector p = new Vector()
+            Vector vector = new Vector()
             {
                 A1 = 0,
-                A2 = value * function(2 * Math.PI * omega * t)
+                A2 = forceValue * function(2 * Math.PI * omega * time)
             };
-            return p;
+            return vector;
         }
     }
 }

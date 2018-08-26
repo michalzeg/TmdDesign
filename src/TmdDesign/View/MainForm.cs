@@ -40,7 +40,7 @@ namespace TmdDesign
             set
             {
                 var tmdParm = value;
-                this.txtTmdMass.Text = tmdParm.M.ToString("F2");
+                this.txtTmdMass.Text = tmdParm.Mass.ToString("F2");
                 this.txtAssumedTmdToStructureMassRatio.Text = (tmdParm.Mi * 100).ToString("F2");
                 this.txtTmdFrequency.Text = tmdParm.OmegaD.ToString("F2");
                 this.txtOptimumTmdFrequency.Text = (tmdParm.DeltaOpt * 100).ToString("F2");
@@ -266,15 +266,15 @@ namespace TmdDesign
             parameterName = "displacement";
             if (radioStructureWithoutTMD.Checked)
             {
-                yValues = this.results.ResultsWithoutTMD.ConvertAll(e => e.StructureU);
+                yValues = this.results.ResultsWithoutTMD.ConvertAll(e => e.StructureDisplacement);
             }
             else if (radioStructureWithTMD.Checked)
             {
-                yValues = this.results.ResultsWithTMD.ConvertAll(e => e.StructureU);
+                yValues = this.results.ResultsWithTMD.ConvertAll(e => e.StructureDisplacement);
             }
             else
             {
-                yValues = this.results.ResultsWithTMD.ConvertAll(e => e.TmdU);
+                yValues = this.results.ResultsWithTMD.ConvertAll(e => e.TmdDisplacement);
             }
         }
 
@@ -283,15 +283,15 @@ namespace TmdDesign
             parameterName = "acceleration";
             if (radioStructureWithoutTMD.Checked)
             {
-                yValues = this.results.ResultsWithoutTMD.ConvertAll(e => e.StructureA);
+                yValues = this.results.ResultsWithoutTMD.ConvertAll(e => e.StructureAcceleration);
             }
             else if (radioStructureWithTMD.Checked)
             {
-                yValues = this.results.ResultsWithTMD.ConvertAll(e => e.StructureA);
+                yValues = this.results.ResultsWithTMD.ConvertAll(e => e.StructureAcceleration);
             }
             else
             {
-                yValues = this.results.ResultsWithTMD.ConvertAll(e => e.TmdA);
+                yValues = this.results.ResultsWithTMD.ConvertAll(e => e.TmdAcceleration);
             }
         }
 

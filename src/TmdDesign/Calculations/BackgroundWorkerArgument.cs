@@ -1,8 +1,5 @@
 ﻿namespace TmdDesign.SimpleClasses
 {
-    /// <summary>
-    /// argument for backgroundworker operations
-    /// </summary>
     public class BackgroundWorkerArgument
     {
         public TmdParameters TmdParms { get; set; }

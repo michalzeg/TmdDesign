@@ -25,11 +25,11 @@ namespace TmdDesign.Calculations.Tests
 
             List<double> actual = new List<double>
             {
-                strucParm.M,
-                Math.Round(strucParm.K, 3),
+                strucParm.Mass,
+                Math.Round(strucParm.Stiffness, 3),
                 strucParm.NaturalFrequency,
                 strucParm.Ksi,
-                strucParm.C
+                strucParm.Damping
             };
 
             CollectionAssert.AreEqual(expected, actual);
@@ -44,11 +44,11 @@ namespace TmdDesign.Calculations.Tests
 
             List<double> actual = new List<double>
             {
-                strucParm.M,
-                Math.Round(strucParm.K, 3),
+                strucParm.Mass,
+                Math.Round(strucParm.Stiffness, 3),
                 strucParm.NaturalFrequency,
                 strucParm.Ksi,
-                Math.Round(strucParm.C, 3)
+                Math.Round(strucParm.Damping, 3)
             };
 
             CollectionAssert.AreEqual(expected, actual);

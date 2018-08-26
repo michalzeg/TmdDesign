@@ -49,9 +49,9 @@ namespace TmdDesign.Calculations.Tests
             NewmarkMethod newmarkMethod = new NewmarkMethod(this.strParms, this.tmdParms, this.force, this.timeParms, 10);
             newmarkMethod.Calculate(exFrequency);
 
-            List<Vector> u = newmarkMethod.U;
-            List<Vector> v = newmarkMethod.V;
-            List<Vector> a = newmarkMethod.A;
+            List<Vector> u = newmarkMethod.Displacement;
+            List<Vector> v = newmarkMethod.Velocity;
+            List<Vector> a = newmarkMethod.Acceleration;
 
             List<double> u1_actual = new List<double>();
             List<double> u2_actual = new List<double>();
@@ -110,10 +110,10 @@ namespace TmdDesign.Calculations.Tests
             double strU_actual = 1390;
 
             int precision = 0;
-            double tmdA_expected = Math.Round(nr.TmdA, precision);
-            double tmdU_expected = Math.Round(nr.TmdU * 1000, precision);
-            double strA_expected = Math.Round(nr.StructureA, precision);
-            double strU_expected = Math.Round(nr.StructureU * 1000, precision);
+            double tmdA_expected = Math.Round(nr.TmdAcceleration, precision);
+            double tmdU_expected = Math.Round(nr.TmdDisplacement * 1000, precision);
+            double strA_expected = Math.Round(nr.StructureAcceleration, precision);
+            double strU_expected = Math.Round(nr.StructureDisplacement * 1000, precision);
 
             Assert.AreEqual(tmdA_expected, tmdA_actual);
             Assert.AreEqual(tmdU_expected, tmdU_actual);

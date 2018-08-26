@@ -38,18 +38,18 @@ namespace TmdDesign.Calculations.Tests
             var factorNR = factorNM.Calculate(excitationFrequency);
 
             var error = new List<Vector>();
-            var mass = EquationOfMotionParameters.MassMatrix(this.strParam.M, this.tmdParam.M);
-            var stiffness = EquationOfMotionParameters.StiffnessMatrix(this.strParam.K, this.tmdParam.K);
-            var damping = EquationOfMotionParameters.DampingMatrix(this.strParam.C, this.tmdParam.C);
+            var mass = EquationOfMotionParameters.MassMatrix(this.strParam.Mass, this.tmdParam.Mass);
+            var stiffness = EquationOfMotionParameters.StiffnessMatrix(this.strParam.Stiffness, this.tmdParam.Stiffness);
+            var damping = EquationOfMotionParameters.DampingMatrix(this.strParam.Damping, this.tmdParam.Damping);
 
             for (int i = 0; i <= factorNM.Time.Count - 1; i++)
             {
                 double time = factorNM.Time[i];
 
-                var force = factorNM.P[i];
-                var acceleration = factorNM.A[i];
-                var velocity = factorNM.V[i];
-                var displacement = factorNM.U[i];
+                var force = factorNM.Force[i];
+                var acceleration = factorNM.Acceleration[i];
+                var velocity = factorNM.Velocity[i];
+                var displacement = factorNM.Displacement[i];
 
                 var result = mass * acceleration + damping * velocity + stiffness * displacement - force;
 

@@ -24,9 +24,9 @@ namespace TmdDesign.Calculations.Tests
 
             var actual = new List<double>
             {
-                Math.Round(tmdParm.M, 3),
-                Math.Round(tmdParm.K, 3),
-                Math.Round(tmdParm.C, 3),
+                Math.Round(tmdParm.Mass, 3),
+                Math.Round(tmdParm.Stiffness, 3),
+                Math.Round(tmdParm.Damping, 3),
                 Math.Round(tmdParm.Mi, 3),
                 Math.Round(tmdParm.OmegaD, 3),
                 Math.Round(tmdParm.DeltaOpt, 3),

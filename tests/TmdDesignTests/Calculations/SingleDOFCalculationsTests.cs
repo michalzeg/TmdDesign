@@ -36,8 +36,8 @@ namespace TmdDesign.Calculations.Tests
 
             var resuls = calcSDF.Calculate(omega);
 
-            var actualU = resuls.StructureU;
-            var actualA = resuls.StructureA;
+            var actualU = resuls.StructureDisplacement;
+            var actualA = resuls.StructureAcceleration;
 
             Assert.AreEqual(actualU, expectedU, 0.1);
             Assert.AreEqual(actualA, expectedA, 0.1);

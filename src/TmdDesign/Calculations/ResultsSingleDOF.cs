@@ -1,12 +1,9 @@
 ﻿namespace TmdDesign.SimpleClasses
 {
-    /// <summary>
-    /// results for SDF element (without TMD)
-    /// </summary>
     public class ResultsSingleDOF
     {
-        public double Omega { get; set; } //excitation frequency
-        public double StructureA { get; set; } //structure acceleration
-        public double StructureU { get; set; } //structure displacement
+        public double Omega { get; set; }
+        public double StructureAcceleration { get; set; }
+        public double StructureDisplacement { get; set; }
     }
 }

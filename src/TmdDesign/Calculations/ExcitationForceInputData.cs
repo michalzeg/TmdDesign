@@ -4,9 +4,6 @@ using System.Threading.Tasks;
 
 namespace TmdDesign.SimpleClasses
 {
-    /// <summary>
-    /// class contains input data for equivalent force calculations
-    /// </summary>
     public class ExcitationForceInputData
     {
         public double DynamicDisplacement { get; set; }
