@@ -18,10 +18,10 @@ namespace TmdDesign.Excel
         public ExcelExporter(ISolverDataProvider solverDataProvider)
         {
             this.solverDataProvider = solverDataProvider;
-            this.getDictionaryPath();
+            this.GetDictionaryPath();
         }
 
-        private void getDictionaryPath()
+        private void GetDictionaryPath()
         {
             string exePath = System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase.Replace("file:///", "");
 
