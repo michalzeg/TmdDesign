@@ -19,8 +19,8 @@ namespace TmdDesign
         public FormExcitationForce()
         {
             InitializeComponent();
-
         }
+
         public FormExcitationForce(MainForm mainForm)
         {
             this.mainForm = mainForm;
@@ -29,10 +29,8 @@ namespace TmdDesign
 
             this.fillDampingRatioAndModalMass();
             this.txtDisplacement_TextChanged(this, null);
-
         }
 
-        //Iview methods
         public ExcitationForceInputData InputData
         {
             get
@@ -46,10 +44,12 @@ namespace TmdDesign
                 return inputData;
             }
         }
+
         public double DynamicStiffness
         {
             set { this.lblDynamicStiffness.Text = value.ToString("0.##"); }
         }
+
         public double EquivalentExcitationForce
         {
             set { this.lblEquivalenForce.Text = value.ToString("0.##"); }
@@ -57,25 +57,23 @@ namespace TmdDesign
 
         private void fillDampingRatioAndModalMass()
         {
-            //methods gets the damping ratio and modal mass from main form
             this.txtDampingRatio.Text = this.mainForm.DampingRatio;
             this.txtModalMass.Text = this.mainForm.ModalMass;
         }
 
         private void txtValidating(object sender, CancelEventArgs e)
         {
-            double d;
-            TextBox t = sender as TextBox;
-            if (!double.TryParse(t.Text, out d) || d <= 0)
+            TextBox textbox = sender as TextBox;
+            if (!double.TryParse(textbox.Text, out double value) || value <= 0)
             {
                 e.Cancel = true;
 
-                t.Select(0, t.Text.Length);
-                this.errorProvider.SetError(t, "Enter positive numbers only.");
+                textbox.Select(0, textbox.Text.Length);
+                this.errorProvider.SetError(textbox, "Enter positive numbers only.");
             }
             else
             {
-                this.errorProvider.SetError(t, "");
+                this.errorProvider.SetError(textbox, "");
             }
         }
 
@@ -89,7 +87,5 @@ namespace TmdDesign
             this.mainForm.EquivalentDynamicForce = this.lblEquivalenForce.Text;
             this.Close();
         }
-
-
     }
 }

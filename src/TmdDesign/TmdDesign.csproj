@@ -51,11 +51,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Calculations\FindMaxAcceleration.cs" />
+    <Compile Include="Calculations\BackgroundWorkerArgument.cs" />
+    <Compile Include="Calculations\BasicDynamicCalculations.cs" />
+    <Compile Include="Calculations\EquationOfMotionParameters.cs" />
+    <Compile Include="Calculations\EquivalentExcitationForce.cs" />
+    <Compile Include="Calculations\ForceParameters.cs" />
+    <Compile Include="Calculations\ISolver.cs" />
+    <Compile Include="Calculations\MaxValueFinder.cs" />
     <Compile Include="Calculations\NewmarkMethod.cs" />
-    <Compile Include="Calculations\ExcitationForce.cs" />
+    <Compile Include="Calculations\ExcitationFunction.cs" />
     <Compile Include="Calculations\Matrix2x2.cs" />
+    <Compile Include="Calculations\Results.cs" />
+    <Compile Include="Calculations\ResultsSingleDOF.cs" />
+    <Compile Include="Calculations\ResultsTMD.cs" />
     <Compile Include="Calculations\SingleDOFCalculations.cs" />
+    <Compile Include="Calculations\SolvingMethod.cs" />
+    <Compile Include="Calculations\StructureParameters.cs" />
+    <Compile Include="Calculations\TimeParameters.cs" />
+    <Compile Include="Calculations\TmdParameters.cs" />
+    <Compile Include="Calculations\TmdParametersCalculations.cs" />
+    <Compile Include="Calculations\Vector.cs" />
     <Compile Include="View\EquivalentExcitationForce.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +78,8 @@
       <DependentUpon>EquivalentExcitationForce.cs</DependentUpon>
     </Compile>
     <Compile Include="View\ExcitationForcePresenter.cs" />
+    <Compile Include="View\IExcitationForceView.cs" />
+    <Compile Include="View\IMainView.cs" />
     <Compile Include="View\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,7 +90,7 @@
     <Compile Include="Calculations\FiniteDifferenceMethod.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Calculations\SimpleClasses.cs" />
+    <Compile Include="Calculations\ExcitationForceInputData.cs" />
     <Compile Include="SavingDataToExcel.cs" />
     <EmbeddedResource Include="View\EquivalentExcitationForce.resx">
       <DependentUpon>EquivalentExcitationForce.cs</DependentUpon>

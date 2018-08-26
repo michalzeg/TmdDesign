@@ -20,7 +20,7 @@ namespace TmdDesign.FindMax.Tests
         [Test]
         public void FindMaxAcceleration_ReturnsProperValue()
         {
-            var maxValue = new MaxValue(10, 0.00001);
+            var maxValue = new MaxValueFinder(10, 0.00001);
 
             var stopLoop = false;
             var xi = 0d;

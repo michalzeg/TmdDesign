@@ -74,15 +74,15 @@ namespace TmdDesign.Calculations
             List<Vector> p = new List<Vector>();
 
             //auxiliary variables
-            Vector p0 = EquationOfMotionParameters.LoadVector( excitationFrequency, this.timeParam.T0,this.excitationForceValue,this.excitationFunction); //force at starting time
+            Vector p0 = EquationOfMotionParameters.LoadVector( excitationFrequency, this.timeParam.StartTime,this.excitationForceValue,this.excitationFunction); //force at starting time
 
             Vector a0 = this.m.Invert() * (p0 - this.c * v0 - this.k * u0); //starting acceleration
-            Vector u_1 = u0 - this.timeParam.Dt * v0 + 0.5 * this.timeParam.Dt * this.timeParam.Dt * a0;//displacement with -1 index
+            Vector u_1 = u0 - this.timeParam.DeltaTime * v0 + 0.5 * this.timeParam.DeltaTime * this.timeParam.DeltaTime * a0;//displacement with -1 index
             Vector v_1 = new Vector(0, 0);
             Vector a_1 = new Vector(0, 0);
-            Matrix2x2 k_ = (1 / (this.timeParam.Dt * this.timeParam.Dt)) * this.m + 1 / (2 * this.timeParam.Dt) * this.c;
-            Matrix2x2 a_ = (1 / (this.timeParam.Dt * this.timeParam.Dt)) * this.m - 1 / (2 * this.timeParam.Dt) * this.c;
-            Matrix2x2 b_ = this.k - (2 / (this.timeParam.Dt * this.timeParam.Dt)) * this.m;
+            Matrix2x2 k_ = (1 / (this.timeParam.DeltaTime * this.timeParam.DeltaTime)) * this.m + 1 / (2 * this.timeParam.DeltaTime) * this.c;
+            Matrix2x2 a_ = (1 / (this.timeParam.DeltaTime * this.timeParam.DeltaTime)) * this.m - 1 / (2 * this.timeParam.DeltaTime) * this.c;
+            Matrix2x2 b_ = this.k - (2 / (this.timeParam.DeltaTime * this.timeParam.DeltaTime)) * this.m;
 
             //u.Add(this.u0);
             //v.Add(this.v0);
@@ -92,16 +92,16 @@ namespace TmdDesign.Calculations
             //Newmartk calculations
             int i = 0;
             
-            double ti = this.timeParam.T0;//time i
+            double ti = this.timeParam.StartTime;//time i
             
             Vector ui = this.u0;
             //Vector vi = this.v0;
             //Vector ai = a0;
 
-            MaxValue tmdA = new MaxValue(this.numberOfExtremes, this.epsilon);
-            MaxValue tmdU = new MaxValue(this.numberOfExtremes, this.epsilon);
-            MaxValue structA = new MaxValue(this.numberOfExtremes, this.epsilon);
-            MaxValue structU = new MaxValue(this.numberOfExtremes, this.epsilon);
+            MaxValueFinder tmdA = new MaxValueFinder(this.numberOfExtremes, this.epsilon);
+            MaxValueFinder tmdU = new MaxValueFinder(this.numberOfExtremes, this.epsilon);
+            MaxValueFinder structA = new MaxValueFinder(this.numberOfExtremes, this.epsilon);
+            MaxValueFinder structU = new MaxValueFinder(this.numberOfExtremes, this.epsilon);
 
             bool tmdAFound = false; //determines if max acceleration and displacement of TMD has been found
             bool tmdUFound = false; 
@@ -117,8 +117,8 @@ namespace TmdDesign.Calculations
 
                 Vector p_ = pi - a_ * u_1 - b_ * ui;
                 Vector ui1 = k_.Invert() * p_;
-                Vector vi = (1 / (2 * this.timeParam.Dt)) * (ui1 - u_1);
-                Vector ai = (1 / (this.timeParam.Dt * this.timeParam.Dt)) * (ui1 - 2 * ui + u_1);
+                Vector vi = (1 / (2 * this.timeParam.DeltaTime)) * (ui1 - u_1);
+                Vector ai = (1 / (this.timeParam.DeltaTime * this.timeParam.DeltaTime)) * (ui1 - 2 * ui + u_1);
                 //if (i <= 5) //only for test purposes
                 //{
                     u.Add(ui);
@@ -148,7 +148,7 @@ namespace TmdDesign.Calculations
                 //ui = ui1;
                 //vi = vi1;
                 //ai = ai1;
-                ti = ti + this.timeParam.Dt;
+                ti = ti + this.timeParam.DeltaTime;
                 i++;
             }
             //******only for test purposes****///

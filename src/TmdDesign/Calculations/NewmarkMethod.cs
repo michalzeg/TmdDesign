@@ -81,30 +81,30 @@ namespace TmdDesign.Calculations
             List<Vector> p = new List<Vector>();
 
             //auxiliary variables
-            Vector p0 = EquationOfMotionParameters.LoadVector( excitationFrequency, this.timeParam.T0,this.excitationForceValue,this.excitationFunction); //force at starting time
+            Vector p0 = EquationOfMotionParameters.LoadVector( excitationFrequency, this.timeParam.StartTime,this.excitationForceValue,this.excitationFunction); //force at starting time
             
             Vector a0 = this.m.Invert() * (p0 - this.c * this.v0 - this.k * this.u0); //starting acceleration
-            Matrix2x2 k_ = this.k + (1 / (this.beta * this.timeParam.Dt * this.timeParam.Dt)) * this.m + this.gamma / (this.beta * this.timeParam.Dt) * this.c;
-            Matrix2x2 ap = 1 / (this.beta*this.timeParam.Dt) * this.m +  (this.gamma / (this.beta)) * this.c;
-            Matrix2x2 bp = (1 / (2 * this.beta)) * this.m + this.timeParam.Dt * (this.gamma / (2 * this.beta) - 1) * this.c;
+            Matrix2x2 k_ = this.k + (1 / (this.beta * this.timeParam.DeltaTime * this.timeParam.DeltaTime)) * this.m + this.gamma / (this.beta * this.timeParam.DeltaTime) * this.c;
+            Matrix2x2 ap = 1 / (this.beta*this.timeParam.DeltaTime) * this.m +  (this.gamma / (this.beta)) * this.c;
+            Matrix2x2 bp = (1 / (2 * this.beta)) * this.m + this.timeParam.DeltaTime * (this.gamma / (2 * this.beta) - 1) * this.c;
             u.Add(this.u0);
             v.Add(this.v0);
             a.Add(a0);
-            time.Add(this.timeParam.T0);
+            time.Add(this.timeParam.StartTime);
             p.Add(p0);
             //Newmartk calculations
             int i = 0;
             
-            double ti = this.timeParam.T0;//time i
+            double ti = this.timeParam.StartTime;//time i
             
             Vector ui = this.u0;
             Vector vi = this.v0;
             Vector ai = a0;
 
-            MaxValue tmdA = new MaxValue(this.numberOfExtremes, this.epsilon);
-            MaxValue tmdU = new MaxValue(this.numberOfExtremes, this.epsilon);
-            MaxValue structA = new MaxValue(this.numberOfExtremes, this.epsilon);
-            MaxValue structU = new MaxValue(this.numberOfExtremes, this.epsilon);
+            MaxValueFinder tmdA = new MaxValueFinder(this.numberOfExtremes, this.epsilon);
+            MaxValueFinder tmdU = new MaxValueFinder(this.numberOfExtremes, this.epsilon);
+            MaxValueFinder structA = new MaxValueFinder(this.numberOfExtremes, this.epsilon);
+            MaxValueFinder structU = new MaxValueFinder(this.numberOfExtremes, this.epsilon);
 
             bool tmdAFound = false; //determines if max acceleration and displacement of TMD has been found
             bool tmdUFound = false; 
@@ -114,7 +114,7 @@ namespace TmdDesign.Calculations
             bool finishLoop = false; //determines when calculations are stopped
             while (!finishLoop)
             {
-                double ti1 = ti + this.timeParam.Dt;//time i+1
+                double ti1 = ti + this.timeParam.DeltaTime;//time i+1
                 Vector pi = EquationOfMotionParameters.LoadVector( excitationFrequency, ti,this.excitationForceValue,this.excitationFunction);
                 Vector pi1 = EquationOfMotionParameters.LoadVector(excitationFrequency, ti1, this.excitationForceValue, this.excitationFunction);
 
@@ -122,8 +122,8 @@ namespace TmdDesign.Calculations
                 Vector dpi_ = dpi + ap * vi + bp * ai;
 
                 Vector dui = k_.Invert() * dpi_;
-                Vector dvi = (this.gamma / (this.beta * this.timeParam.Dt)) * dui - (this.gamma / this.beta) * vi + this.timeParam.Dt * (1 - (this.gamma / (2 * this.beta))) * ai;
-                Vector dai = (1 / (this.beta * this.timeParam.Dt * this.timeParam.Dt)) * dui - (1 / (this.beta * this.timeParam.Dt)) * vi - (1 / (2 * this.beta)) * ai;
+                Vector dvi = (this.gamma / (this.beta * this.timeParam.DeltaTime)) * dui - (this.gamma / this.beta) * vi + this.timeParam.DeltaTime * (1 - (this.gamma / (2 * this.beta))) * ai;
+                Vector dai = (1 / (this.beta * this.timeParam.DeltaTime * this.timeParam.DeltaTime)) * dui - (1 / (this.beta * this.timeParam.DeltaTime)) * vi - (1 / (2 * this.beta)) * ai;
 
                 Vector ui1 = ui + dui;//i+1
                 Vector vi1 = vi + dvi;//i+1

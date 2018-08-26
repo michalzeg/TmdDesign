@@ -11,25 +11,10 @@ using TmdDesign.Excel;
 
 namespace TmdDesign
 {
-    public interface IMainView
-    {
-        TmdParameters TmdParameters { get; set; }
-        StructureParameters StructureParameters { get; }
-        TimeParameters TimeParameters { get; }
-        ForceParameters ForceParameters {get;}
-        SolvingMethod SolvingMethod { get; }
-        Results Results { set; }
-        double MiCoefficient { get; } 
-        bool SaveResultsToExcelFile { get; }
-
-        string StatusText { set; }
-        int Progress { set; }
-    }
-    
     public class MainPresenter
     {
         private readonly IMainView view;
-        private BackgroundWorker bw;
+        private BackgroundWorker backgroundWorker;
 
         public MainPresenter(IMainView view)
         {
@@ -38,8 +23,7 @@ namespace TmdDesign
 
         public void RunCalculations()
         {
-            //getting data from view
-            if (!(this.bw == null))
+            if (!(this.backgroundWorker == null))
                 return;
             var tmdParms = this.view.TmdParameters;
             var strParms = this.view.StructureParameters;
@@ -58,30 +42,33 @@ namespace TmdDesign
                 SaveResultsToExcelFile = saveResultsToExcelFile
             };
 
-            this.bw = new BackgroundWorker();
-            this.bw.WorkerReportsProgress = true;
-            this.bw.WorkerSupportsCancellation = true;
-            this.bw.ProgressChanged += new ProgressChangedEventHandler(this.bw_ProgressChanged);
-            this.bw.DoWork += new DoWorkEventHandler(this.bw_DoWork);
-            this.bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(this.bw_Completed);
+            this.backgroundWorker = new BackgroundWorker
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+            this.backgroundWorker.ProgressChanged += new ProgressChangedEventHandler(this.bw_ProgressChanged);
+            this.backgroundWorker.DoWork += new DoWorkEventHandler(this.bw_DoWork);
+            this.backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(this.bw_Completed);
 
-            this.bw.RunWorkerAsync(bwArg);
+            this.backgroundWorker.RunWorkerAsync(bwArg);
         }
 
         public void CalculateTMDProperties()
         {
-            var tmdCalcs = new TmdParametersCalculations();
-            var strParms = this.view.StructureParameters;
-            var mi = this.view.MiCoefficient;
-            var tmdParms = tmdCalcs.CalculateAllParameters(strParms, mi);
+            var tmdCalculations = new TmdParametersCalculations();
+            var strParameters = this.view.StructureParameters;
+            var miCoefficient = this.view.MiCoefficient;
+            var tmdParameters = tmdCalculations.CalculateAllParameters(strParameters, miCoefficient);
 
-            this.view.TmdParameters = tmdParms;//binding results to view
+            this.view.TmdParameters = tmdParameters;
         }
+
         public void CancelCalculations()
         {
-            if (this.bw != null)
+            if (this.backgroundWorker != null)
             {
-                this.bw.CancelAsync();
+                this.backgroundWorker.CancelAsync();
                 this.view.StatusText = "Canceling calculations....";
             }
         }
@@ -97,33 +84,22 @@ namespace TmdDesign
             var solvingMethod = bwArg.SolvingMethod;
             var saveResultsToExcelFile = bwArg.SaveResultsToExcelFile;
 
-
-            //lists with results
             var resWithTMD = new List<ResultsTMD>();
             var resWithoutTMD = new List<ResultsSingleDOF>();
+            var withTMDCalcs = GetSolverMethod(tmdParms, strParms, timeParms, forceParms, solvingMethod);
 
-            //main calculation classes
-            ISolver withTMDCalcs;
-            if (solvingMethod == SolvingMethod.NewmarkMethod)
-                withTMDCalcs = new NewmarkMethod(strParms, tmdParms, forceParms.ForceValue, timeParms, 0.1);
-            else
-                withTMDCalcs = new FiniteDifferenceMethod(strParms, tmdParms, forceParms.ForceValue, timeParms, 0.1);
-            //NewmarkMethod withTMDCalcs = new NewmarkMethod(strParms, tmdParms, forceParms.ForceValue, timeParms, 0.01);
             var withoutTMDCalcs = new SingleDOFCalculations(strParms, forceParms);
 
-            //calculations are being performed untill the force frequency is equal to 4x normal frequency
             var finalFrequency = forceParms.FinalFrequency;
-            var currentFrequency = forceParms.StartFrequency; //current excitation force
+            var currentFrequency = forceParms.StartFrequency;
             var currentIteration = 1;
-            //calculate progress
 
             var maxNumberOfIterations = Convert.ToInt32((finalFrequency - currentFrequency) / forceParms.ExcitationFrequencyIntervalValue + 1);
 
-            //savingDataToExcel
             var saveData = new SavingDataToExcel(withTMDCalcs);
 
             var progress = 0;
-            this.bw.ReportProgress(progress, currentFrequency.ToString("F2"));
+            this.backgroundWorker.ReportProgress(progress, currentFrequency.ToString("F2"));
             Calculate(e, forceParms, saveResultsToExcelFile, resWithTMD, resWithoutTMD, withTMDCalcs, withoutTMDCalcs, finalFrequency, ref currentFrequency, ref currentIteration, maxNumberOfIterations, saveData, ref progress);
 
             var res = new Results
@@ -134,6 +110,16 @@ namespace TmdDesign
             e.Result = res;
         }
 
+        private static ISolver GetSolverMethod(TmdParameters tmdParms, StructureParameters strParms, TimeParameters timeParms, ForceParameters forceParms, SolvingMethod solvingMethod)
+        {
+            ISolver withTMDCalcs;
+            if (solvingMethod == SolvingMethod.NewmarkMethod)
+                withTMDCalcs = new NewmarkMethod(strParms, tmdParms, forceParms.ForceValue, timeParms, 0.1);
+            else
+                withTMDCalcs = new FiniteDifferenceMethod(strParms, tmdParms, forceParms.ForceValue, timeParms, 0.1);
+            return withTMDCalcs;
+        }
+
         private void Calculate(DoWorkEventArgs e, ForceParameters forceParms, bool saveResultsToExcelFile, List<ResultsTMD> resWithTMD, List<ResultsSingleDOF> resWithoutTMD, ISolver withTMDCalcs, SingleDOFCalculations withoutTMDCalcs, double finalFrequency, ref double currentFrequency, ref int currentIteration, int maxNumberOfIterations, SavingDataToExcel saveData, ref int progress)
         {
             while (currentFrequency <= finalFrequency)
@@ -141,31 +127,31 @@ namespace TmdDesign
                 if (this.checkCancelCalculations())
                 {
                     e.Cancel = true;
-                    break;//cancel calculations
+                    break;
                 }
                 var tempResWithTMD = withTMDCalcs.Calculate(currentFrequency);
-                resWithTMD.Add(tempResWithTMD);//add results to the list
+                resWithTMD.Add(tempResWithTMD);
                 if (saveResultsToExcelFile)
                     saveData.SaveResultsToFile(currentFrequency);
 
                 var tempResWithoutTMD = withoutTMDCalcs.Calculate(currentFrequency);
-                resWithoutTMD.Add(tempResWithoutTMD);//add results to the list
+                resWithoutTMD.Add(tempResWithoutTMD);
 
                 progress = Convert.ToInt32(Convert.ToDouble(currentIteration) / Convert.ToDouble(maxNumberOfIterations) * 100);
 
                 currentFrequency += forceParms.ExcitationFrequencyIntervalValue;
                 currentIteration++;
-                this.bw.ReportProgress(progress, currentFrequency.ToString("F2"));
+                this.backgroundWorker.ReportProgress(progress, currentFrequency.ToString("F2"));
             }
         }
 
         private bool checkCancelCalculations()
         {
             var result = false;
-            if (this.bw.CancellationPending)
+            if (this.backgroundWorker.CancellationPending)
             {
                 result = true;
-                this.bw.CancelAsync();
+                this.backgroundWorker.CancelAsync();
             }
             return result;
         }
@@ -179,6 +165,7 @@ namespace TmdDesign
             }
             this.view.Progress = e.ProgressPercentage;
         }
+
         private void bw_Completed(object sender, RunWorkerCompletedEventArgs e)
         {
             if (!e.Cancelled)
@@ -194,8 +181,8 @@ namespace TmdDesign
                 this.view.StatusText = "Calculations have been canceled";
             }
 
-            this.bw.Dispose();
-            this.bw = null;
+            this.backgroundWorker.Dispose();
+            this.backgroundWorker = null;
         }
     }
 }

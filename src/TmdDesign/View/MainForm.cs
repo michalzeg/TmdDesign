@@ -20,78 +20,70 @@ namespace TmdDesign
         public MainForm()
         {
             InitializeComponent();
-            //disabling tab results
+
             (this.tabResults as Control).Enabled = false;
             this.presenter = new MainPresenter(this);
         }
 
-        //IView properties
         public TmdParameters TmdParameters
         {
             get
             {
-
-                var m = double.Parse(this.txtTmdMass.Text);
-                var mi = double.Parse(this.txtAssumedTmdToStructureMassRatio.Text)/100;
+                var mass = double.Parse(this.txtTmdMass.Text);
+                var mi = double.Parse(this.txtAssumedTmdToStructureMassRatio.Text) / 100;
                 var omegaD = double.Parse(this.txtTmdFrequency.Text);
-                var deltaOpt = double.Parse(this.txtOptimumTmdFrequency.Text)/100;
-                var ksi = double.Parse(this.txtOptimumTmdDapingRatio.Text)/100;
-                var tmdParm = new TmdParameters(m, mi, omegaD, deltaOpt, ksi);
+                var deltaOpt = double.Parse(this.txtOptimumTmdFrequency.Text) / 100;
+                var ksi = double.Parse(this.txtOptimumTmdDapingRatio.Text) / 100;
+                var tmdParm = new TmdParameters(mass, mi, omegaD, deltaOpt, ksi);
                 return tmdParm;
-
             }
             set
             {
                 var tmdParm = value;
                 this.txtTmdMass.Text = tmdParm.M.ToString("F2");
-                this.txtAssumedTmdToStructureMassRatio.Text = (tmdParm.Mi*100).ToString("F2");
+                this.txtAssumedTmdToStructureMassRatio.Text = (tmdParm.Mi * 100).ToString("F2");
                 this.txtTmdFrequency.Text = tmdParm.OmegaD.ToString("F2");
-                this.txtOptimumTmdFrequency.Text = (tmdParm.DeltaOpt*100).ToString("F2");
-                this.txtOptimumTmdDapingRatio.Text = (tmdParm.Ksi*100).ToString("F2");
-
+                this.txtOptimumTmdFrequency.Text = (tmdParm.DeltaOpt * 100).ToString("F2");
+                this.txtOptimumTmdDapingRatio.Text = (tmdParm.Ksi * 100).ToString("F2");
             }
         }
+
         public StructureParameters StructureParameters
         {
             get
             {
-                double m;//mass
-                double omega;//frequency
-                double ksi; //damping ratio
-                bool ignoreDamping;//
+                var mass = double.Parse(this.txtStrModalMass.Text);
+                var omega = double.Parse(this.txtStrNaturalFrequency.Text);
+                var ksi = double.Parse(this.txtStrDampingRatio.Text) / 100;
+                var ignoreDamping = this.chBoxIncludeStrDamping.Checked;
 
-                m = double.Parse(this.txtStrModalMass.Text);
-                omega = double.Parse(this.txtStrNaturalFrequency.Text);
-                ksi = double.Parse(this.txtStrDampingRatio.Text)/100;
-                ignoreDamping = this.chBoxIncludeStrDamping.Checked;
-
-                var strParams = new StructureParameters(m, omega, ksi, ignoreDamping);
+                var strParams = new StructureParameters(mass, omega, ksi, ignoreDamping);
                 return strParams;
             }
         }
-        public TimeParameters TimeParameters 
+
+        public TimeParameters TimeParameters
         {
             get
             {
-                double dt;//time
-                dt = double.Parse(this.txtTimeInterval.Text);
-                var timeParm = new TimeParameters(0, dt);
+                var deltaTime = double.Parse(this.txtTimeInterval.Text);
+                var timeParm = new TimeParameters(0, deltaTime);
                 return timeParm;
             }
-                
         }
+
         public ForceParameters ForceParameters
         {
             get
             {
-                var F = double.Parse(this.txtExcitationForce.Text);
+                var force = double.Parse(this.txtExcitationForce.Text);
                 var dOmega = double.Parse(this.txtExcitationFrequencyInterval.Text);
                 var startFrequency = double.Parse(this.txtStartFrequency.Text);
                 var finalFrequency = double.Parse(this.txtFinalFrequency.Text);
 
                 var forceParm = new ForceParameters
                 {
-                    ForceValue = F,
+                    ForceValue = force,
                     ExcitationFrequencyIntervalValue = dOmega,
                     StartFrequency = startFrequency,
                     FinalFrequency = finalFrequency
@@ -99,6 +91,7 @@ namespace TmdDesign
                 return forceParm;
             }
         }
+
         public bool SaveResultsToExcelFile
         {
             get
@@ -106,13 +99,15 @@ namespace TmdDesign
                 return this.chBoxSaveResultsToExcel.Checked;
             }
         }
+
         public double MiCoefficient
         {
             get
             {
-                return double.Parse(this.txtAssumedTmdToStructureMassRatio.Text)/100;
+                return double.Parse(this.txtAssumedTmdToStructureMassRatio.Text) / 100;
             }
         }
+
         public Results Results
         {
             set
@@ -121,18 +116,11 @@ namespace TmdDesign
                 this.updateResults();
             }
         }
+
         public int Progress
         {
             set
             {
-                /*if (this.statusProgressBar.InvokeRequired)
-                    this.progressBarMain.Invoke(new MethodInvoker(delegate { this.progressBarMain.Value = value; }));
-                else
-                    this.progressBarMain.Value = value;*/
-                /*if (this.statusStrip.InvokeRequired)
-                    this.statusStrip.Invoke(new MethodInvoker(delegate { (this.statusStrip.Items["statusProgressBar"] = value; }));
-                else
-                    this.statusStrip.Items[1].Text = value;*/
                 if (this.statusProgressBar.GetCurrentParent().InvokeRequired)
                 {
                     this.statusProgressBar.GetCurrentParent().Invoke(new MethodInvoker(delegate { this.statusProgressBar.Value = value; }));
@@ -143,15 +131,11 @@ namespace TmdDesign
                 }
             }
         }
+
         public string StatusText
         {
             set
             {
-
-                //if (this.statusStrip.InvokeRequired)
-                //    this.statusStrip.Invoke(new MethodInvoker(delegate { this.statusStrip.Items[1].Text = value; }));
-                //else
-                //    this.statusStrip.Items[1].Text = value;
                 if (this.statusLabel.GetCurrentParent().InvokeRequired)
                 {
                     this.statusLabel.GetCurrentParent().Invoke(new MethodInvoker(delegate { this.statusLabel.Text = value; }));
@@ -162,52 +146,50 @@ namespace TmdDesign
                 }
             }
         }
-      
+
         public SolvingMethod SolvingMethod
         {
             get
             {
-                SolvingMethod sm;
-                if (radioNewmarkMethod.Checked)
-                    sm = SolvingMethod.NewmarkMethod;
-                else
-                    sm = SolvingMethod.FiniteDifferenceMethod;
-                return sm;
+                SolvingMethod solverMethod = radioNewmarkMethod.Checked
+                    ? SolvingMethod.NewmarkMethod
+                    : SolvingMethod.FiniteDifferenceMethod;
+
+                return solverMethod;
             }
-                
         }
-        //properties needed for equivalen form
+
         public string DampingRatio
         {
             get { return this.txtStrDampingRatio.Text; }
         }
+
         public string ModalMass
         {
             get { return this.txtStrModalMass.Text; }
         }
+
         public string EquivalentDynamicForce
         {
             set { this.txtExcitationForce.Text = value; }
         }
-        
-        
-        //validation of text boxes
+
         private void txtValidating(object sender, CancelEventArgs e)
         {
-            double d;
-            var t = sender as TextBox;
-            if (!double.TryParse(t.Text,out d) || d <= 0)
+            var timebox = sender as TextBox;
+            if (!double.TryParse(timebox.Text, out double value) || value <= 0)
             {
                 e.Cancel = true;
-                
-                t.Select(0, t.Text.Length);
-                this.errorProvider.SetError(t, "Enter positive numbers only.");
+
+                timebox.Select(0, timebox.Text.Length);
+                this.errorProvider.SetError(timebox, "Enter positive numbers only.");
             }
             else
             {
-                this.errorProvider.SetError(t, "");
+                this.errorProvider.SetError(timebox, "");
             }
         }
+
         private void chBoxEnterOwnParameters_CheckedChanged(object sender, EventArgs e)
         {
             if (this.chBoxEnterOwnParameters.Checked)
@@ -239,86 +221,80 @@ namespace TmdDesign
                 this.btnCalculateTmdParameters.Enabled = true;
             }
         }
+
         private void btnRunCalculations_Click(object sender, EventArgs e)
         {
             this.presenter.RunCalculations();
             this.btnCancelCalculations.Enabled = true;
         }
-        //View methods
-        //sets results for given parameter in the given chart and labels
-        private void updateChart(Chart chart,List<double> x, List<double> y)
+
+        private void updateChart(Chart chart, List<double> x, List<double> y)
         {
-            //chart - chart to which the results are set
             chart.Series["Serie"].Points.Clear();
-            for (int i =0;i<=x.Count -1;i++)
+            for (int i = 0; i <= x.Count - 1; i++)
             {
                 chart.Series["Serie"].Points.AddXY(x[i], y[i]);
-                //chart.Series["WithoutTMD"].Points.AddXY(omega[i], pWithoutTMD[i]);
             }
-
-
         }
-        private void updateResults() //void updates all charts with results
+
+        private void updateResults()
         {
+            (this.tabResults as Control).Enabled = true;
 
-            (this.tabResults as Control).Enabled = true; //enable tab with results
+            List<double> xValues;
+            List<double> yValues;
 
-            List<double> x; //list with x on the chart
-            List<double> y; //list with x on the chart
-
-
-            //check result type: acceleration or displacement
-            x = this.results.ResultsWithTMD.ConvertAll(e => e.Omega);
+            xValues = this.results.ResultsWithTMD.ConvertAll(e => e.Omega);
             string parameterName;
             if (radioAcceleration.Checked)
             {
-                parameterName = "acceleration";
-                if (radioStructureWithoutTMD .Checked)
-                {
-                    y = this.results.ResultsWithoutTMD.ConvertAll(e => e.StructureA);
-                }
-                else if (radioStructureWithTMD.Checked)
-                {
-                    y = this.results.ResultsWithTMD.ConvertAll(e => e.StructureA);
-                }
-                else
-                {
-                    y = this.results.ResultsWithTMD.ConvertAll(e => e.TmdA);
-                }
-                
-                //acceleration result type has been chosen
-                /*omega = this.results.ResultsWithTMD.ConvertAll(x => x.Omega);
-                pStructureWithoutTMD = this.results.ResultsWithoutTMD.ConvertAll(x => x.StructureA);
-                pStructureWithTMD = this.results.ResultsWithTMD.ConvertAll(x => x.StructureA);
-                pTMD = this.results.ResultsWithTMD.ConvertAll(x => x.TmdA);*/
+                GetAcceleration(out yValues, out parameterName);
             }
             else
             {
-                parameterName = "displacement";
-                //displacement result type has been chosen
-                if (radioStructureWithoutTMD.Checked)
-                {
-                    y = this.results.ResultsWithoutTMD.ConvertAll(e => e.StructureU);
-                }
-                else if (radioStructureWithTMD.Checked)
-                {
-                    y = this.results.ResultsWithTMD.ConvertAll(e => e.StructureU);
-                }
-                else
-                {
-                    y = this.results.ResultsWithTMD.ConvertAll(e => e.TmdU);
-                }
-                
+                GetDisplacement(out yValues, out parameterName);
             }
 
-            //updating charts with results
-            this.updateChart(this.chartResults, x, y);
+            this.updateChart(this.chartResults, xValues, yValues);
 
-            var max = y.Max().ToString();
+            var max = yValues.Max().ToString();
             this.lblMaxValue.Text = string.Format("Max value of the {0}: {1}", parameterName, max);
-            
-
         }
+
+        private void GetDisplacement(out List<double> yValues, out string parameterName)
+        {
+            parameterName = "displacement";
+            if (radioStructureWithoutTMD.Checked)
+            {
+                yValues = this.results.ResultsWithoutTMD.ConvertAll(e => e.StructureU);
+            }
+            else if (radioStructureWithTMD.Checked)
+            {
+                yValues = this.results.ResultsWithTMD.ConvertAll(e => e.StructureU);
+            }
+            else
+            {
+                yValues = this.results.ResultsWithTMD.ConvertAll(e => e.TmdU);
+            }
+        }
+
+        private void GetAcceleration(out List<double> yValues, out string parameterName)
+        {
+            parameterName = "acceleration";
+            if (radioStructureWithoutTMD.Checked)
+            {
+                yValues = this.results.ResultsWithoutTMD.ConvertAll(e => e.StructureA);
+            }
+            else if (radioStructureWithTMD.Checked)
+            {
+                yValues = this.results.ResultsWithTMD.ConvertAll(e => e.StructureA);
+            }
+            else
+            {
+                yValues = this.results.ResultsWithTMD.ConvertAll(e => e.TmdA);
+            }
+        }
+
         private void clearResults()
         {
             (this.tabResults as Control).Enabled = false;
@@ -347,10 +323,5 @@ namespace TmdDesign
         {
             this.presenter.CancelCalculations();
         }
-
-       
-       
-        
-        
     }
 }
