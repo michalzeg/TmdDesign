@@ -7,8 +7,8 @@
     <ProjectGuid>{CDF18B83-1DDF-44F5-BDFA-FE12C982AE77}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TmdDesign</RootNamespace>
-    <AssemblyName>TmdDesign</AssemblyName>
+    <RootNamespace>TmdDesign.App</RootNamespace>
+    <AssemblyName>TmdDesign.App</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
