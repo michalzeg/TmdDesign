@@ -53,25 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackgroundWorker\BackgroundWorkerArgument.cs" />
-    <Compile Include="Solvers\BasicDynamicCalculations.cs" />
-    <Compile Include="Parameters\EquationOfMotionParameters.cs" />
-    <Compile Include="Calculations\EquivalentExcitationForce.cs" />
-    <Compile Include="Parameters\ForceParameters.cs" />
-    <Compile Include="Solvers\ISolver.cs" />
-    <Compile Include="Solvers\MaxValueFinder.cs" />
-    <Compile Include="Solvers\NewmarkMethod.cs" />
-    <Compile Include="Calculations\ExcitationFunction.cs" />
-    <Compile Include="Matrix\Matrix2x2.cs" />
-    <Compile Include="Results\Results.cs" />
-    <Compile Include="Results\ResultsSingleDOF.cs" />
-    <Compile Include="Results\ResultsTMD.cs" />
-    <Compile Include="Calculations\SingleDOFCalculations.cs" />
-    <Compile Include="Solvers\SolvingMethod.cs" />
-    <Compile Include="Parameters\StructureParameters.cs" />
-    <Compile Include="Parameters\TimeParameters.cs" />
-    <Compile Include="Parameters\TmdParameters.cs" />
-    <Compile Include="Parameters\TmdParametersCalculations.cs" />
-    <Compile Include="Matrix\Vector.cs" />
     <Compile Include="View\ExcitationForceWindow\EquivalentExcitationForce.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,11 +69,9 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow\MainPresenter.cs" />
-    <Compile Include="Solvers\FiniteDifferenceMethod.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Calculations\ExcitationForceInputData.cs" />
-    <Compile Include="SavingDataToExcel.cs" />
+    <Compile Include="Excel\ExcelExporter.cs" />
     <EmbeddedResource Include="View\ExcitationForceWindow\EquivalentExcitationForce.resx">
       <DependentUpon>EquivalentExcitationForce.cs</DependentUpon>
     </EmbeddedResource>

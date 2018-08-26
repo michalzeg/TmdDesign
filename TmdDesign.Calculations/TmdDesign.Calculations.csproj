@@ -41,7 +41,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculations\EquivalentExcitationForce.cs" />
+    <Compile Include="Calculations\ExcitationForceInputData.cs" />
+    <Compile Include="Calculations\ExcitationFunction.cs" />
+    <Compile Include="Calculations\SingleDOFCalculations.cs" />
+    <Compile Include="Matrix\Matrix2x2.cs" />
+    <Compile Include="Matrix\Vector.cs" />
+    <Compile Include="Parameters\EquationOfMotionParameters.cs" />
+    <Compile Include="Parameters\ForceParameters.cs" />
+    <Compile Include="Parameters\StructureParameters.cs" />
+    <Compile Include="Parameters\TimeParameters.cs" />
+    <Compile Include="Parameters\TmdParameters.cs" />
+    <Compile Include="Parameters\TmdParametersCalculations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results\Results.cs" />
+    <Compile Include="Results\ResultsSingleDOF.cs" />
+    <Compile Include="Results\ResultsTMD.cs" />
+    <Compile Include="Solvers\BasicDynamicCalculations.cs" />
+    <Compile Include="Solvers\FiniteDifferenceMethod.cs" />
+    <Compile Include="Solvers\ISolver.cs" />
+    <Compile Include="Solvers\ISolverDataProvider.cs" />
+    <Compile Include="Solvers\MaxValueFinder.cs" />
+    <Compile Include="Solvers\NewmarkMethod.cs" />
+    <Compile Include="Solvers\SolvingMethod.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

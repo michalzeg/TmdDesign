@@ -75,14 +75,14 @@ namespace TmdDesign
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
-            var bwArg = (BackgroundWorkerArgument)e.Argument;
+            var backgroundWorkerAgrument = (BackgroundWorkerArgument)e.Argument;
 
-            var tmdParms = bwArg.TmdParms;
-            var strParms = bwArg.StrParms;
-            var timeParms = bwArg.TimeParms;
-            var forceParms = bwArg.ForceParms;
-            var solvingMethod = bwArg.SolvingMethod;
-            var saveResultsToExcelFile = bwArg.SaveResultsToExcelFile;
+            var tmdParms = backgroundWorkerAgrument.TmdParms;
+            var strParms = backgroundWorkerAgrument.StrParms;
+            var timeParms = backgroundWorkerAgrument.TimeParms;
+            var forceParms = backgroundWorkerAgrument.ForceParms;
+            var solvingMethod = backgroundWorkerAgrument.SolvingMethod;
+            var saveResultsToExcelFile = backgroundWorkerAgrument.SaveResultsToExcelFile;
 
             var resWithTMD = new List<ResultsTMD>();
             var resWithoutTMD = new List<ResultsSingleDOF>();
@@ -96,7 +96,7 @@ namespace TmdDesign
 
             var maxNumberOfIterations = Convert.ToInt32((finalFrequency - currentFrequency) / forceParms.ExcitationFrequencyIntervalValue + 1);
 
-            var saveData = new SavingDataToExcel(withTMDCalcs);
+            var saveData = new ExcelExporter(withTMDCalcs);
 
             var progress = 0;
             this.backgroundWorker.ReportProgress(progress, currentFrequency.ToString("F2"));
@@ -120,7 +120,7 @@ namespace TmdDesign
             return withTMDCalcs;
         }
 
-        private void Calculate(DoWorkEventArgs e, ForceParameters forceParms, bool saveResultsToExcelFile, List<ResultsTMD> resWithTMD, List<ResultsSingleDOF> resWithoutTMD, ISolver withTMDCalcs, SingleDOFCalculations withoutTMDCalcs, double finalFrequency, ref double currentFrequency, ref int currentIteration, int maxNumberOfIterations, SavingDataToExcel saveData, ref int progress)
+        private void Calculate(DoWorkEventArgs e, ForceParameters forceParms, bool saveResultsToExcelFile, List<ResultsTMD> resWithTMD, List<ResultsSingleDOF> resWithoutTMD, ISolver withTMDCalcs, SingleDOFCalculations withoutTMDCalcs, double finalFrequency, ref double currentFrequency, ref int currentIteration, int maxNumberOfIterations, ExcelExporter saveData, ref int progress)
         {
             while (currentFrequency <= finalFrequency)
             {
