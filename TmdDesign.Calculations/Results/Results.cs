@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TmdDesign.SimpleClasses
+namespace TmdDesign.Calculations.Results
 {
     public class Results
     {

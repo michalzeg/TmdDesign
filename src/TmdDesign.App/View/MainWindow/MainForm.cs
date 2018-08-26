@@ -7,8 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TmdDesign.SimpleClasses;
+
 using System.Windows.Forms.DataVisualization.Charting;
+using TmdDesign.Calculations.Parameters;
+using TmdDesign.Calculations.Results;
+using TmdDesign.Calculations.Solvers;
 
 namespace TmdDesign
 {

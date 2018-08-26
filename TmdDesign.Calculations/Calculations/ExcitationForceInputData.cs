@@ -2,7 +2,7 @@
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TmdDesign.SimpleClasses
+namespace TmdDesign.Calculations.Calculations
 {
     public class ExcitationForceInputData
     {

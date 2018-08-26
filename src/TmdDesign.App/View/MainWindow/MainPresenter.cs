@@ -5,9 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using TmdDesign.Calculations;
-using TmdDesign.ExcitationForces;
-using TmdDesign.SimpleClasses;
+
 using TmdDesign.Excel;
+using TmdDesign.App.BackgroundWorker;
+using TmdDesign.Calculations.Parameters;
+using TmdDesign.Calculations.Results;
+using TmdDesign.Calculations.Solvers;
+using TmdDesign.Calculations.Calculations;
 
 namespace TmdDesign
 {

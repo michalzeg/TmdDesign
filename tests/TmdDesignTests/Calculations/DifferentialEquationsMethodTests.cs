@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TmdDesign.Calculations;
-using TmdDesign.SimpleClasses;
-using TmdDesign.Matrix;
-using TmdDesign.ExcitationForces;
-using NUnit.Framework;
 
-namespace TmdDesign.Calculations.Tests
+using NUnit.Framework;
+using TmdDesign.Calculations.Parameters;
+using TmdDesign.Calculations.Calculations;
+using TmdDesign.Calculations.Solvers;
+using TmdDesign.Calculations.Matrix;
+
+namespace TmdDesignTests.Calculations
 {
     [TestFixture]
     public class DifferentialEquationsMethodTests
@@ -17,7 +19,7 @@ namespace TmdDesign.Calculations.Tests
         private StructureParameters strParam;
         private TmdParameters tmdParam;
         private TimeParameters timeParms;
-        private ExcitationFunction exFunc = new ExcitationForces.ExcitationFunction(ExcitationForces.ExcitationFunctions.Sin);
+        private ExcitationFunction exFunc = new ExcitationFunction(ExcitationFunctions.Sin);
         private double force = 1000000;
 
         [OneTimeSetUp]

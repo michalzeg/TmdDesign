@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TmdDesign.SimpleClasses;
-using TmdDesign.ExcitationForces;
-using System.Threading.Tasks;
 
-namespace TmdDesign.Calculations
+using System.Threading.Tasks;
+using TmdDesign.Calculations.Parameters;
+using TmdDesign.Calculations.Results;
+using TmdDesign.Calculations.Solvers;
+
+namespace TmdDesign.Calculations.Calculations
 {
     public class SingleDOFCalculations
     {

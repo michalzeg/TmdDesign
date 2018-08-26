@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using TmdDesign.Matrix;
+using TmdDesign.Calculations.Matrix;
 
-namespace TmdDesign.SimpleClasses
+namespace TmdDesign.Calculations.Solvers
 {
     public interface ISolverDataProvider
     {

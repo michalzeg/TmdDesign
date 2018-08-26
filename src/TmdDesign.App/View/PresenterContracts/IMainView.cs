@@ -1,4 +1,6 @@
-﻿using TmdDesign.SimpleClasses;
+﻿using TmdDesign.Calculations.Parameters;
+using TmdDesign.Calculations.Results;
+using TmdDesign.Calculations.Solvers;
 
 namespace TmdDesign
 {
@@ -7,10 +9,10 @@ namespace TmdDesign
         TmdParameters TmdParameters { get; set; }
         StructureParameters StructureParameters { get; }
         TimeParameters TimeParameters { get; }
-        ForceParameters ForceParameters {get;}
+        ForceParameters ForceParameters { get; }
         SolvingMethod SolvingMethod { get; }
         Results Results { set; }
-        double MiCoefficient { get; } 
+        double MiCoefficient { get; }
         bool SaveResultsToExcelFile { get; }
 
         string StatusText { set; }

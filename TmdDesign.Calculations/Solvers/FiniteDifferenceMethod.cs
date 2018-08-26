@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TmdDesign.ExcitationForces;
-using TmdDesign.Matrix;
-using TmdDesign.FindMax;
-using TmdDesign.SimpleClasses;
+using TmdDesign.Calculations.Calculations;
+using TmdDesign.Calculations.Matrix;
+using TmdDesign.Calculations.Parameters;
+using TmdDesign.Calculations.Results;
 
 //ALL UNITS in [kg], [N], and [m], [Hz]
-namespace TmdDesign.Calculations
+namespace TmdDesign.Calculations.Solvers
 {
     public class FiniteDifferenceMethod : ISolver
     {

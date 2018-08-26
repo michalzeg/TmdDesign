@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TmdDesign.FindMax
+namespace TmdDesign.Calculations.Solvers
 {
     public class MaxValueFinder
     {

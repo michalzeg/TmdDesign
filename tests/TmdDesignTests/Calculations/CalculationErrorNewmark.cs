@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TmdDesign.Matrix;
-using TmdDesign.SimpleClasses;
-using NUnit.Framework;
-using TmdDesign.ExcitationForces;
 
-namespace TmdDesign.Calculations.Tests
+using NUnit.Framework;
+using TmdDesign.Calculations.Calculations;
+using TmdDesign.Calculations.Matrix;
+using TmdDesign.Calculations.Parameters;
+using TmdDesign.Calculations.Results;
+using TmdDesign.Calculations.Solvers;
+
+namespace TmdDesignTests.Calculations
 {
     [TestFixture]
     public class CalculationErrorNewmark
@@ -14,7 +17,7 @@ namespace TmdDesign.Calculations.Tests
         private StructureParameters strParam;
         private TmdParameters tmdParam;
         private TimeParameters timeParms;
-        private ExcitationFunction exFunc = new ExcitationFunction(ExcitationForces.ExcitationFunctions.Sin);
+        private ExcitationFunction exFunc = new ExcitationFunction(ExcitationFunctions.Sin);
         private double force = 1000000;
 
         [OneTimeSetUp]

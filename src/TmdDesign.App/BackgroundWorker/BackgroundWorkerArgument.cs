@@ -1,4 +1,7 @@
-﻿namespace TmdDesign.SimpleClasses
+﻿using TmdDesign.Calculations.Parameters;
+using TmdDesign.Calculations.Solvers;
+
+namespace TmdDesign.App.BackgroundWorker
 {
     public class BackgroundWorkerArgument
     {

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TmdDesign.SimpleClasses;
-using TmdDesign.ExcitationForces;
+using TmdDesign.Calculations.Calculations;
 
 namespace TmdDesign
 {

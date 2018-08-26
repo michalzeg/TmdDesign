@@ -1,4 +1,4 @@
-﻿namespace TmdDesign.SimpleClasses
+﻿namespace TmdDesign.Calculations.Results
 {
     public class ResultsTMD
     {

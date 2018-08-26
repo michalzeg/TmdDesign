@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-
 using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using TmdDesign.Calculations;
-using TmdDesign.Matrix;
-using TmdDesign.SimpleClasses;
 using NUnit.Framework;
-using TmdDesign.ExcitationForces;
-using System.Linq;
 
-namespace TmdDesign.Calculations.Tests
+using System.Linq;
+using TmdDesign.Calculations.Parameters;
+using TmdDesign.Calculations.Calculations;
+using TmdDesign.Calculations.Solvers;
+using TmdDesign.Calculations.Matrix;
+using TmdDesign.Calculations.Results;
+
+namespace TmdDesignTests.Calculations
 {
     [TestFixture]
     public class NewmarkMethodTests
@@ -21,7 +23,7 @@ namespace TmdDesign.Calculations.Tests
         private StructureParameters strParms;
         private TmdParameters tmdParms;
         private TimeParameters timeParms;
-        private ExcitationFunction exFunc = new ExcitationFunction(ExcitationForces.ExcitationFunctions.Sin);
+        private ExcitationFunction exFunc = new ExcitationFunction(ExcitationFunctions.Sin);
         private double force = 30000000;
 
         [OneTimeSetUp]
@@ -85,7 +87,7 @@ namespace TmdDesign.Calculations.Tests
         private StructureParameters strParms;
         private TmdParameters tmdParms;
         private TimeParameters timeParms;
-        private ExcitationFunction exFunc = new ExcitationFunction(ExcitationForces.ExcitationFunctions.Sin);
+        private ExcitationFunction exFunc = new ExcitationFunction(ExcitationFunctions.Sin);
         private double force = 30000000;
 
         [OneTimeSetUp]

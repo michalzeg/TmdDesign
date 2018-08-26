@@ -1,4 +1,4 @@
-﻿namespace TmdDesign.SimpleClasses
+﻿namespace TmdDesign.Calculations.Parameters
 {
     public class TimeParameters
     {

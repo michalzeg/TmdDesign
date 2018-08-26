@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TmdDesign.SimpleClasses
+namespace TmdDesign.Calculations.Solvers
 {
     public static class BasicDynamicCalculations
     {

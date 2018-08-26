@@ -1,4 +1,4 @@
-﻿using TmdDesign.SimpleClasses;
+﻿using TmdDesign.Calculations.Calculations;
 
 namespace TmdDesign
 {
@@ -8,6 +8,5 @@ namespace TmdDesign
 
         double DynamicStiffness { set; }
         double EquivalentExcitationForce { set; }
-        
     }
 }

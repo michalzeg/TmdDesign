@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TmdDesign.SimpleClasses;
+using TmdDesign.Calculations.Calculations;
 
 namespace TmdDesign
 {

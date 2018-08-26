@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-
 using System.Threading.Tasks;
-using TmdDesign.SimpleClasses;
+
 using OfficeOpenXml;
+using TmdDesign.Calculations.Solvers;
 
 namespace TmdDesign.Excel
 {

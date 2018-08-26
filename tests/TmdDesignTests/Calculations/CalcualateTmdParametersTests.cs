@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TmdDesign.Calculations;
+using TmdDesign.Calculations.Parameters;
 
-using TmdDesign.SimpleClasses;
-
-namespace TmdDesign.Calculations.Tests
+namespace TmdDesignTests.Calculations
 {
     [TestFixture]
     public class CalcualateTmdParametersTests

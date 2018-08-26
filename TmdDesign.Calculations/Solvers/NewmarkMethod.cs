@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TmdDesign.ExcitationForces;
-using TmdDesign.Matrix;
-using TmdDesign.FindMax;
-using TmdDesign.SimpleClasses;
+using TmdDesign.Calculations.Calculations;
+using TmdDesign.Calculations.Matrix;
+using TmdDesign.Calculations.Parameters;
+using TmdDesign.Calculations.Results;
 
 //ALL UNITS in [kg], [N], and [m], [Hz]
-namespace TmdDesign.Calculations
+namespace TmdDesign.Calculations.Solvers
 {
     public class NewmarkMethod : ISolver
     {
@@ -55,7 +55,7 @@ namespace TmdDesign.Calculations
             this.stifness = EquationOfMotionParameters.StiffnessMatrix(this.strParam.Stiffness, this.tmdParam.Stiffness);
             this.damping = EquationOfMotionParameters.DampingMatrix(this.strParam.Damping, this.tmdParam.Damping);
 
-            this.excitationFunction = ExcitationForces.ExcitationFunctions.Sin;
+            this.excitationFunction = ExcitationFunctions.Sin;
         }
 
         public ResultsTMD Calculate(double excitationFrequency)

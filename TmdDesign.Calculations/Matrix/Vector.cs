@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TmdDesign.Matrix
+namespace TmdDesign.Calculations.Matrix
 {
     public class Vector
     {

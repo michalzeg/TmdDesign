@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TmdDesign.Matrix;
+using TmdDesign.Calculations.Matrix;
 
-namespace TmdDesign.Matrix.Tests
+namespace TmdDesignTests.Calculations
 {
     [TestFixture]
     public class Matrix2x2Tests

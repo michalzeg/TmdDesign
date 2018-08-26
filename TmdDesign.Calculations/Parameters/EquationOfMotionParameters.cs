@@ -1,8 +1,8 @@
 ﻿using System;
-using TmdDesign.Matrix;
-using TmdDesign.ExcitationForces;
+using TmdDesign.Calculations.Calculations;
+using TmdDesign.Calculations.Matrix;
 
-namespace TmdDesign.SimpleClasses
+namespace TmdDesign.Calculations.Parameters
 {
     public static class EquationOfMotionParameters
     {

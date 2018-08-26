@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TmdDesign.FindMax;
+using TmdDesign.Calculations.Solvers;
 
-namespace TmdDesign.FindMax.Tests
+namespace TmdDesignTests.Calculations
 {
     [TestFixture]
     public class FindMaxAccelerationTests

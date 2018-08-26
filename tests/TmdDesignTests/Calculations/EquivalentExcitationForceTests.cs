@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TmdDesign.ExcitationForces;
-using TmdDesign.SimpleClasses;
-using NUnit.Framework;
 
-namespace TmdDesign.ExcitationForces.Tests
+using NUnit.Framework;
+using TmdDesign.Calculations.Calculations;
+
+namespace TmdDesignTests.Calculations
 {
     [TestFixture]
     public class EquivalentExcitationForceTests

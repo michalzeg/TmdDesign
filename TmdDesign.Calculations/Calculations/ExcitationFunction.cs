@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TmdDesign.ExcitationForces
+namespace TmdDesign.Calculations.Calculations
 {
     public delegate double ExcitationFunction(double x);
 

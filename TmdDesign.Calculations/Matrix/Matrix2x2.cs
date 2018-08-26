@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TmdDesign.Matrix
+namespace TmdDesign.Calculations.Matrix
 {
     public class Matrix2x2
     {

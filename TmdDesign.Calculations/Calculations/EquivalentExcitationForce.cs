@@ -1,6 +1,6 @@
-﻿using TmdDesign.SimpleClasses;
+﻿using TmdDesign.Calculations.Solvers;
 
-namespace TmdDesign.ExcitationForces
+namespace TmdDesign.Calculations.Calculations
 {
     public class EquivalentExcitationForce
     {

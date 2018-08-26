@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TmdDesign.Calculations;
-using TmdDesign.SimpleClasses;
+using TmdDesign.Calculations.Parameters;
 
-namespace TmdDesign.Calculations.Tests
+namespace TmdDesignTests.Calculations
 {
     [TestFixture]
     public class StructureParametersTests

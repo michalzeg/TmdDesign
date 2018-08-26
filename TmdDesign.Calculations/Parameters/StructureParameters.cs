@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TmdDesign.SimpleClasses
+namespace TmdDesign.Calculations.Parameters
 {
     public class StructureParameters
     {
