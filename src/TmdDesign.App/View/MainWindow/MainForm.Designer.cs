@@ -346,7 +346,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::TmdDesign.Properties.Resources.Drawing_Model;
+            this.pictureBox1.Image = global::TmdDesign.App.Properties.Resources.Drawing_Model;
             this.pictureBox1.Location = new System.Drawing.Point(327, 8);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(407, 405);

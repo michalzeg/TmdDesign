@@ -33,22 +33,22 @@ namespace TmdDesign.Calculations.Tests
         public void CheckCalculationError()
         {
             double exFrequency = 10;
-            NewmarkMethod nm = new NewmarkMethod(this.strParam, this.tmdParam, this.force, this.timeParms, 0.01);
-            ResultsTMD nr = nm.Calculate(exFrequency);
+            NewmarkMethod newmarkMethod = new NewmarkMethod(this.strParam, this.tmdParam, this.force, this.timeParms, 0.01);
+            ResultsTMD results = newmarkMethod.Calculate(exFrequency);
 
             List<Vector> error = new List<Vector>();
             Matrix2x2 m = EquationOfMotionParameters.MassMatrix(this.strParam.Mass, this.tmdParam.Mass);
             Matrix2x2 k = EquationOfMotionParameters.StiffnessMatrix(this.strParam.Stiffness, this.tmdParam.Stiffness);
             Matrix2x2 c = EquationOfMotionParameters.DampingMatrix(this.strParam.Damping, this.tmdParam.Damping);
 
-            for (int i = 0; i <= nm.Time.Count - 1; i++)
+            for (int i = 0; i <= newmarkMethod.Time.Count() - 1; i++)
             {
-                double time = nm.Time[i];
-                //Vector p = this.loadVector(exFrequency, time);
-                Vector p = nm.Force[i]; //laod
-                Vector a = nm.Acceleration[i];//acceleration
-                Vector v = nm.Velocity[i];//velocity
-                Vector u = nm.Displacement[i];//displacement
+                double time = newmarkMethod.Time.ElementAt(i);
+
+                Vector p = newmarkMethod.Force.ElementAt(i);
+                Vector a = newmarkMethod.Acceleration.ElementAt(i);
+                Vector v = newmarkMethod.Velocity.ElementAt(i);
+                Vector u = newmarkMethod.Displacement.ElementAt(i);
 
                 Vector e = m * a + c * v + k * u - p;
 

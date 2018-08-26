@@ -42,14 +42,14 @@ namespace TmdDesign.Calculations.Tests
             var stiffness = EquationOfMotionParameters.StiffnessMatrix(this.strParam.Stiffness, this.tmdParam.Stiffness);
             var damping = EquationOfMotionParameters.DampingMatrix(this.strParam.Damping, this.tmdParam.Damping);
 
-            for (int i = 0; i <= factorNM.Time.Count - 1; i++)
+            for (int i = 0; i <= factorNM.Time.Count() - 1; i++)
             {
-                double time = factorNM.Time[i];
+                double time = factorNM.Time.ElementAt(i);
 
-                var force = factorNM.Force[i];
-                var acceleration = factorNM.Acceleration[i];
-                var velocity = factorNM.Velocity[i];
-                var displacement = factorNM.Displacement[i];
+                var force = factorNM.Force.ElementAt(i);
+                var acceleration = factorNM.Acceleration.ElementAt(i);
+                var velocity = factorNM.Velocity.ElementAt(i);
+                var displacement = factorNM.Displacement.ElementAt(i);
 
                 var result = mass * acceleration + damping * velocity + stiffness * displacement - force;
 

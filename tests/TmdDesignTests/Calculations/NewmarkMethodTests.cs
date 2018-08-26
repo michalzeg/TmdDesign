@@ -11,6 +11,7 @@ using TmdDesign.Matrix;
 using TmdDesign.SimpleClasses;
 using NUnit.Framework;
 using TmdDesign.ExcitationForces;
+using System.Linq;
 
 namespace TmdDesign.Calculations.Tests
 {
@@ -49,9 +50,9 @@ namespace TmdDesign.Calculations.Tests
             NewmarkMethod newmarkMethod = new NewmarkMethod(this.strParms, this.tmdParms, this.force, this.timeParms, 10);
             newmarkMethod.Calculate(exFrequency);
 
-            List<Vector> u = newmarkMethod.Displacement;
-            List<Vector> v = newmarkMethod.Velocity;
-            List<Vector> a = newmarkMethod.Acceleration;
+            List<Vector> u = newmarkMethod.Displacement.ToList();
+            List<Vector> v = newmarkMethod.Velocity.ToList();
+            List<Vector> a = newmarkMethod.Acceleration.ToList();
 
             List<double> u1_actual = new List<double>();
             List<double> u2_actual = new List<double>();
