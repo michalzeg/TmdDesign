@@ -1,7 +1,13 @@
 # TmdDesign
 
-[![Build status](https://dev.azure.com/michalzeg/GitHub/_apis/build/status/TmdDesign)](https://dev.azure.com/michalzeg/GitHub/_build/latest?definitionId=12)
+| Branch  | Build Status |
+| ------------- | ------------- |
+| master  |[![Build status](https://dev.azure.com/michalzeg/GitHub/_apis/build/status/TmdDesign)](https://dev.azure.com/michalzeg/GitHub/_build/latest?definitionId=12)|
 
+### Description
+Temperature distribution calculator for bridge sections
+
+### Other information
 - Developed in C#
 - Tuned Mass Dampers calculator 
 - Accelerations, Velocitioes, Displacements available
